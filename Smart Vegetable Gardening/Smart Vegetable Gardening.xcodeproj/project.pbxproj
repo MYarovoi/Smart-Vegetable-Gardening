@@ -10,9 +10,33 @@
 		1A49326E2DC2262E00FE3D03 /* Smart Vegetable Gardening.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Smart Vegetable Gardening.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		1A49328C2DC24D3E00FE3D03 /* Exceptions for "Smart Vegetable Gardening" folder in "Smart Vegetable Gardening" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Preview Content/vegetables.json",
+			);
+			target = 1A49326D2DC2262E00FE3D03 /* Smart Vegetable Gardening */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		1A49328D2DC24D3E00FE3D03 /* Exceptions for "Smart Vegetable Gardening" folder in "Compile Sources" phase from "Smart Vegetable Gardening" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = 1A49326A2DC2262E00FE3D03 /* Sources */;
+			membershipExceptions = (
+				"Preview Content/vegetables.json",
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		1A4932702DC2262E00FE3D03 /* Smart Vegetable Gardening */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				1A49328C2DC24D3E00FE3D03 /* Exceptions for "Smart Vegetable Gardening" folder in "Smart Vegetable Gardening" target */,
+				1A49328D2DC24D3E00FE3D03 /* Exceptions for "Smart Vegetable Gardening" folder in "Compile Sources" phase from "Smart Vegetable Gardening" target */,
+			);
 			path = "Smart Vegetable Gardening";
 			sourceTree = "<group>";
 		};
