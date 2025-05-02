@@ -11,7 +11,7 @@ import SwiftUI
 struct Smart_Vegetable_GardeningApp: App {
     var body: some Scene {
         WindowGroup {
-            VegetableListScreen()
+            VegetableTabBarScreen()
         }
     }
 }
