@@ -9,6 +9,6 @@ import Foundation
 import SwiftData
 
 let previewContainer: ModelContainer = {
-    let conteiner = try! ModelContainer(for: Vegetable.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    let conteiner = try! ModelContainer(for: Vegetable.self, MyGardenVegetable.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     return conteiner
 }()
