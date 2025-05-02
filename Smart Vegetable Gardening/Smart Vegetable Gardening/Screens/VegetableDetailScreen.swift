@@ -6,9 +6,23 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct VegetableDetailScreen: View {
     let vegetable: Vegetable
+    @State private var showSeedOrSeedlingMenu: Bool = false
+    @Environment(\.modelContext) private var context
+    
+    private func saveVegetableToMyGarden(with plantOption: PlantOption) {
+        let myGardenVegetable = MyGardenVegetable(vegetable: vegetable, plantOption: plantOption)
+        context.insert(myGardenVegetable)
+        do {
+          try context.save()
+        } catch {
+            print("DEBUG: Failed to save context: \(error.localizedDescription)")
+        }
+        
+    }
     
     var body: some View {
         ScrollView {
@@ -67,6 +81,24 @@ struct VegetableDetailScreen: View {
                 
             }.padding()
         }.navigationTitle(vegetable.name)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        showSeedOrSeedlingMenu = true
+                    } label: {
+                        Image(systemName: "plus")
+                            .font(.title2)
+                            .foregroundStyle(.green)
+                    }
+                }
+            }
+            .sheet(isPresented: $showSeedOrSeedlingMenu) {
+                SeedOrSeedlingView { option in
+                    saveVegetableToMyGarden(with: option)
+                }
+                .presentationDetents([.fraction(0.25)])
+                .presentationBackground(Color(.systemGray6))
+            }
     }
 }
 
@@ -104,5 +136,7 @@ struct DetailRow: View {
 }
 
 #Preview {
-    VegetableDetailScreen(vegetable: PreviewData.loadVegetables()[0])
+    NavigationStack {
+        VegetableDetailScreen(vegetable: PreviewData.loadVegetables()[0])
+    }.modelContainer(previewContainer)
 }

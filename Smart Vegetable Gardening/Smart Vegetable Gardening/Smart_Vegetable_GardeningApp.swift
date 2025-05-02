@@ -12,6 +12,7 @@ struct Smart_Vegetable_GardeningApp: App {
     var body: some Scene {
         WindowGroup {
             VegetableTabBarScreen()
+                .modelContainer(for: [Vegetable.self, MyGardenVegetable.self])
         }
     }
 }
