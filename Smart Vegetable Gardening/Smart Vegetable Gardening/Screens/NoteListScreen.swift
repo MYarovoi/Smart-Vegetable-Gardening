@@ -12,7 +12,20 @@ struct NoteListScreen: View {
     @State private var addNotePresented: Bool = false
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List(myGardenVegetable.notes ?? []) { note in
+            HStack {
+                if let photoData = note.photo,
+                   let uiImage = UIImage(data: photoData) {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 75, height: 75)
+                        .clipShape(Circle())
+                        .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
+                }
+                Text(note.title)
+            }
+        }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Add Note") {

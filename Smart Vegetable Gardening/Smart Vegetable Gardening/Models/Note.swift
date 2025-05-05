@@ -13,7 +13,7 @@ class Note {
     var title: String
     var body: String
     var dateCreated: Date
-    @Attribute(.externalStorage) var photo: Date? = nil //Store photo in photolibrary instead of in app directly.
+    @Attribute(.externalStorage) var photo: Data? = nil //Store photo in photolibrary instead of in app directly.
     var myGardenVegetable: MyGardenVegetable?
     
     init(title: String, body: String, dateCreated: Date = Date()) {
