@@ -14,6 +14,9 @@ class MyGardenVegetable {
     var plantOption: PlantOption
     var datePlanted: Date = Date()
     
+    @Relationship(deleteRule: .cascade) // Once MyGardenVegetable deleted all related notes are deleted too
+    var notes: [Note]?
+    
     init(vegetable: Vegetable, plantOption: PlantOption) {
         self.vegetable = vegetable
         self.plantOption = plantOption
