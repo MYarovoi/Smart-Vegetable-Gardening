@@ -18,6 +18,9 @@ struct AddNoteScreen: View {
     @State private var uiImage: UIImage?
     @State private var imageData: Data?
     @State private var isCameraSelected: Bool = false
+    private var isFormValid: Bool {
+        !noteTitle.isEmptyOrWhitespace || !noteBody.isEmptyOrWhitespace
+    }
     
     private func saveNote() {
         let note = Note(title: noteTitle, body: noteBody)
@@ -72,7 +75,9 @@ struct AddNoteScreen: View {
                     .padding()
             }
             
-        }.task(id: selectedPhotoItem) { // any time selectedPhotoItem is changed will run this task
+        }.navigationTitle("Add Note")
+        
+        .task(id: selectedPhotoItem) { // any time selectedPhotoItem is changed will run this task
             if let selectedPhotoItem {
                 do {
                     if let data = try await selectedPhotoItem.loadTransferable(type: Data.self) {
@@ -104,7 +109,7 @@ struct AddNoteScreen: View {
                 Button("Save") {
                     saveNote()
                     dismiss()
-                }
+                }.disabled(!isFormValid)
             }
         }
     }
