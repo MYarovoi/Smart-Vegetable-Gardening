@@ -17,6 +17,7 @@ struct AddNoteScreen: View {
     @State private var selectedPhotoItem: PhotosPickerItem? = nil
     @State private var uiImage: UIImage?
     @State private var imageData: Data?
+    @State private var isCameraSelected: Bool = false
     
     private func saveNote() {
         let note = Note(title: noteTitle, body: noteBody)
@@ -32,6 +33,22 @@ struct AddNoteScreen: View {
                 .frame(height: 200)
             
             HStack(spacing: 20) {
+                Button {
+                    if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                        isCameraSelected = true
+                    }
+                } label: {
+                    ZStack {
+                        Circle()
+                            .fill(Color.blue.opacity(0.2))
+                            .frame(width: 60, height: 60)
+                        Image(systemName: "camera.fill")
+                            .font(.title)
+                            .foregroundStyle(.green)
+                    }
+                }
+
+                
                 PhotosPicker(selection: $selectedPhotoItem, matching: .images, photoLibrary: .shared()) {
                     ZStack {
                         Circle()
@@ -67,6 +84,14 @@ struct AddNoteScreen: View {
                 }
             }
         }
+        
+        .sheet(isPresented: $isCameraSelected, content: {
+            ImagePicker(image: $uiImage, sourceType: .camera)
+        })
+        
+        .onChange(of: uiImage, { _, _ in
+            imageData = uiImage?.pngData()
+        })
         
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
