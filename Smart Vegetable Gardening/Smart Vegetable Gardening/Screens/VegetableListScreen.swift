@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct VegetableListScreen: View {
-    @State private var vegetables: [Vegetable] = []
+    let vegetables: [Vegetable]
     
     var body: some View {
         List(vegetables) { vegetable in
@@ -19,19 +19,6 @@ struct VegetableListScreen: View {
             }
         }
         .listStyle(.plain)
-        .task {
-            do {
-                let client = VegetableHTTPClient()
-                vegetables = try await client.fetchVegetables()
-            } catch {
-                print("DEBUG: Failed to fetch vegetables: \(error.localizedDescription)")
-            }
-        }.navigationTitle("Vegetables")
-    }
-}
-
-#Preview {
-    NavigationStack {
-        VegetableListScreen()
+        .navigationTitle("Vegetables")
     }
 }

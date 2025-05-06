@@ -8,10 +8,19 @@
 import SwiftUI
 
 struct VegetableTabBarScreen: View {
+    @State private var vegetables: [Vegetable] = []
+    private var pests: [Pest] {
+        let allPests = vegetables.flatMap { $0.pests ?? [] }
+        return Array(Set(allPests.map { $0.name.lowercased() })) // New array with unic names
+            .compactMap { name in
+                allPests.first { $0.name.lowercased() == name } // Go thought unic names, compare to allPests.name and create new [Pest] array
+            }
+    }
+    
     var body: some View {
         TabView {
             NavigationStack {
-                VegetableListScreen()
+                VegetableListScreen(vegetables: vegetables)
             }.tabItem {
                 Image(systemName: "leaf")
                 Text("Vegetables")
@@ -25,10 +34,18 @@ struct VegetableTabBarScreen: View {
             }
             
             NavigationStack {
-                Text("PestsScreen")
+                PestsListScreen(pests: pests)
             }.tabItem {
                 Image(systemName: "ladybug")
                 Text("Pests")
+            }
+        }
+        .task {
+            do {
+                let client = VegetableHTTPClient()
+                vegetables = try await client.fetchVegetables()
+            } catch {
+                print("DEBUG: Failed to fetch vegetables: \(error.localizedDescription)")
             }
         }
     }
