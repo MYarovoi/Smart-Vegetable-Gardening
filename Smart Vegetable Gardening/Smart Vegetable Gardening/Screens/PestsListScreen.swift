@@ -11,6 +11,13 @@ struct PestsListScreen: View {
     let pests: [Pest]
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List(pests) { pest in
+            NavigationLink {
+                PestDetailScreen(pest: pest)
+            } label: {
+                PestCellView(pest: pest)
+            }
+        }.listStyle(.plain)
+            .navigationTitle("Pests")
     }
 }

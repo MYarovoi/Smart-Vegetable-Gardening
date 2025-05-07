@@ -52,5 +52,5 @@ struct VegetableTabBarScreen: View {
 }
 
 #Preview {
-    VegetableTabBarScreen()
+        VegetableTabBarScreen()
 }
